@@ -11,6 +11,16 @@ using System.Drawing;
 using System.IO;
 
 namespace ToastHelper {
+    public static class Common // static 不是必须
+    {
+        private static bool _IsPausingScan = false;
+        public static bool IsPausingScan
+        {
+            get { return _IsPausingScan; }
+            set { _IsPausingScan = value; }
+        }
+    }
+
     public partial class MainWindow : Window {
         private ToastManager _manager;
         private Action _notify;
@@ -39,7 +49,8 @@ namespace ToastHelper {
             _manager.Init<ToastManager>("ClipBoard Qr Helper");
             ToastManager.ToastCallback += ToastManager_ToastCallback;
             GetRunningObjectTable(0, out this.rot);
-        }
+
+    }
 
         private void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs) {
             App.Current.Dispatcher.Invoke(() => {
@@ -63,7 +74,7 @@ namespace ToastHelper {
 
         private void ClipboardChanged(object sender, EventArgs e)
         {
-            if (Clipboard.ContainsImage())
+            if (Clipboard.ContainsImage() && Common.IsPausingScan == false)
             {
                 Bitmap image = BitmapFromSource(Clipboard.GetImage());
                 IBarcodeReader reader = new BarcodeReader();

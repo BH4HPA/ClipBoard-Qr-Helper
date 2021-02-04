@@ -22,11 +22,13 @@ namespace ToastHelper {
         private void PauseChecking(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("will pause");
+            Common.IsPausingScan = true;
         }
 
         private void UnPauseChecking(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("will continue");
+            Common.IsPausingScan = false;
         }
         private void GetAutoStart(object sender, RoutedEventArgs e)
         {
