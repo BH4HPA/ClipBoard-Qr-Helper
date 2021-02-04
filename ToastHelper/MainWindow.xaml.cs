@@ -82,7 +82,12 @@ namespace ToastHelper {
             if (Clipboard.ContainsImage() && Common.IsPausingScan == false)
             {
                 Bitmap image = null;
-                try { image = BitmapFromSource(Clipboard.GetImage()); } catch { image = null; }
+                try { image = BitmapFromSource(Clipboard.GetImage()); } catch {
+                    try { image = (Bitmap)Image.FromFile(Clipboard.GetFileDropList()[0]); } catch
+                    {
+                        image = null;
+                    }
+                }
                 if (image != null)
                 {
                     IBarcodeReader reader = new BarcodeReader();
