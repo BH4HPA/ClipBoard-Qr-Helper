@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainForm For ClipBoardQrHelper"
         Height="77.906"
-        Width="257.592" Icon="QR code.ico" ShowInTaskbar="False" ResizeMode="NoResize" Visibility="Hidden">
+        Width="257.592" Icon="QR code.ico" ShowInTaskbar="False" ResizeMode="NoResize" Visibility="Visible" Opacity="0" AllowsTransparency="True" WindowStyle="None">
     <Grid>
         <Label Content="Hello World" HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="130"/>
 
