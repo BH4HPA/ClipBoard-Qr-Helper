@@ -66,7 +66,7 @@ namespace ToastHelper {
         private void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs) {
             App.Current.Dispatcher.Invoke(() => {
                 if (arg.StartsWith("copy:")) Clipboard.SetText (arg.Substring(5));
-                if (arg.StartsWith("goUrl:")) Process.Start("explorer.exe", arg.Substring(6));
+                if (arg.StartsWith("goUrl:")) Process.Start(arg.Substring(6));
             });
         }
 
