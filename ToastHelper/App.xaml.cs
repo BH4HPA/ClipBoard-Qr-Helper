@@ -21,23 +21,21 @@ namespace ToastHelper {
 
         private void PauseChecking(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("will pause");
             Common.IsPausingScan = true;
         }
 
         private void UnPauseChecking(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("will continue");
             Common.IsPausingScan = false;
         }
         private void GetAutoStart(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("will set auto start");
+            AutoStart.SetAutoStart();
         }
 
         private void CancelAutoStart(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("will reset auto start");
+            AutoStart.UnsetAutoStart();
         }
     }
     public class DelegateCommand : ICommand
@@ -83,7 +81,7 @@ namespace ToastHelper {
             }
         }
 
-        private bool _isAutoStart = false;
+        private bool _isAutoStart = AutoStart.IsAutoStart();
         public bool IsAutoStart
         {
             get { return _isAutoStart; }
