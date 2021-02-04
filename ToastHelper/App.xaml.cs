@@ -15,6 +15,10 @@ namespace ToastHelper {
         {
             _taskbar = (TaskbarIcon)FindResource("Taskbar");
             base.OnStartup(e);
+            for (int i = 1; i == e.Args.Length; i++)
+            {
+                if (e.Args[i - 1] == "--silence") Common.IsSilence = true;
+            }
         }
 
         private TaskbarIcon _taskbar;

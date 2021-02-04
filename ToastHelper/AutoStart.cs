@@ -26,7 +26,7 @@ namespace ToastHelper
             var startupPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Startup),
                 "ClipBoardQrHelper.lnk");
-            CreateShortcut(startupPath, null);
+            CreateShortcut(startupPath, "--silence");
         }
 
         public static void UnsetAutoStart()

@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToastHelper"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Height="240"
-        Width="480">
+        Title="MainForm For ClipBoardQrHelper"
+        Height="77.906"
+        Width="257.592" Icon="QR code.ico" ShowInTaskbar="False" ResizeMode="NoResize" Visibility="Hidden">
     <Grid>
         <Label Content="Hello World" HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button Content="Get a toast" Height="23" Margin="10,57,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" Click="Button_Click"/>
 
     </Grid>
 </Window>

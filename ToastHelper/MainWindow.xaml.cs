@@ -19,6 +19,13 @@ namespace ToastHelper {
             get { return _IsPausingScan; }
             set { _IsPausingScan = value; }
         }
+
+        private static bool _IsSilence = false;
+        public static bool IsSilence
+        {
+            get { return _IsSilence; }
+            set { _IsSilence = value; }
+        }
     }
 
     public partial class MainWindow : Window {
@@ -49,7 +56,11 @@ namespace ToastHelper {
             _manager.Init<ToastManager>("ClipBoard Qr Helper");
             ToastManager.ToastCallback += ToastManager_ToastCallback;
             GetRunningObjectTable(0, out this.rot);
-
+            if (Common.IsSilence == false)
+            {
+                _notify = new Action(() => _manager.Notify("欢迎使用，我在托盘为你服务哦！", "ClipBoard Qr Helper")); ; ;
+                _notify?.BeginInvoke(null, null);
+        }
     }
 
         private void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs) {
@@ -57,12 +68,6 @@ namespace ToastHelper {
                 if (arg.StartsWith("copy:")) Clipboard.SetText (arg.Substring(5));
                 if (arg.StartsWith("goUrl:")) Process.Start("explorer.exe", arg.Substring(6));
             });
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _notify = new Action(() => _manager.Notify("Hi","World"));
-            _notify?.BeginInvoke(null, null);
         }
 
         protected override void OnSourceInitialized(EventArgs e)
