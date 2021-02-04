@@ -81,21 +81,25 @@ namespace ToastHelper {
         {
             if (Clipboard.ContainsImage() && Common.IsPausingScan == false)
             {
-                Bitmap image = BitmapFromSource(Clipboard.GetImage());
-                IBarcodeReader reader = new BarcodeReader();
-                var barcodeBitmap = image;
-                var result = reader.Decode(barcodeBitmap);
-                if (result != null)
+                Bitmap image = null;
+                try { image = BitmapFromSource(Clipboard.GetImage()); } catch { image = null; }
+                if (image != null)
                 {
-                    if (result.Text.ToLower().StartsWith("http://") || result.Text.ToLower().StartsWith("https://"))
+                    IBarcodeReader reader = new BarcodeReader();
+                    var barcodeBitmap = image;
+                    var result = reader.Decode(barcodeBitmap);
+                    if (result != null)
                     {
-                        _notify = new Action(() => _manager.Notify("从剪贴板图片中读取到了二维码信息", result.Text, new ToastCommands[] { new ToastCommands { Content = "复制", Argument = "copy:" + result.Text } }, new ToastCommands[] { new ToastCommands { Content = "前往", Argument = "goUrl:" + result.Text } })); ; ;
+                        if (result.Text.ToLower().StartsWith("http://") || result.Text.ToLower().StartsWith("https://"))
+                        {
+                            _notify = new Action(() => _manager.Notify("从剪贴板图片中读取到了二维码信息", result.Text, new ToastCommands[] { new ToastCommands { Content = "复制", Argument = "copy:" + result.Text } }, new ToastCommands[] { new ToastCommands { Content = "前往", Argument = "goUrl:" + result.Text } })); ; ;
+                        }
+                        else
+                        {
+                            _notify = new Action(() => _manager.Notify("从剪贴板图片中读取到了二维码信息", result.Text, new ToastCommands[] { new ToastCommands { Content = "复制", Argument = "copy:" + result.Text } }, new ToastCommands[] { new ToastCommands { Content = "忽略", Argument = "nothing" } })); ; ;
+                        }
+                        _notify?.BeginInvoke(null, null);
                     }
-                    else
-                    {
-                        _notify = new Action(() => _manager.Notify("从剪贴板图片中读取到了二维码信息", result.Text, new ToastCommands[] { new ToastCommands { Content = "复制", Argument = "copy:" + result.Text } }, new ToastCommands[] { new ToastCommands { Content = "忽略", Argument = "nothing"} })); ; ;
-                    }
-                    _notify?.BeginInvoke(null, null);
                 }
             }
         }
