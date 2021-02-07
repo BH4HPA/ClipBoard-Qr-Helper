@@ -40,7 +40,7 @@ namespace ToastCore.Notification {
             _aumid = aumid;
 
             string exename = Assembly.GetExecutingAssembly().GetName().Name;
-            string shortpath = "\\Microsoft\\Windows\\Start Menu\\A" + exename;
+            string shortpath = "\\Microsoft\\Windows\\Start Menu\\Programs\\Ray\\ClipBoard Qr Helper";
             var shortcut = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 + shortpath + $"\\{_aumid}.lnk";
             if (!File.Exists(shortcut))
