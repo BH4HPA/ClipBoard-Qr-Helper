@@ -60,8 +60,8 @@ namespace ToastHelper {
             {
                 _notify = new Action(() => _manager.Notify("欢迎使用，我在托盘为你服务哦！", "ClipBoard Qr Helper")); ; ;
                 _notify?.BeginInvoke(null, null);
+            }
         }
-    }
 
         private void ToastManager_ToastCallback(string app, string arg, List<KeyValuePair<string, string>> kvs) {
             App.Current.Dispatcher.Invoke(() => {
@@ -75,6 +75,7 @@ namespace ToastHelper {
             base.OnSourceInitialized(e);
             var windowClipboardManager = new ClipboardManager(this);
             windowClipboardManager.ClipboardChanged += ClipboardChanged;
+            this.Visibility = Visibility.Hidden;
         }
 
         private void ClipboardChanged(object sender, EventArgs e)
